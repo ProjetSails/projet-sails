@@ -1,5 +1,6 @@
 /**
  * Service de comparaison du mdp et de création du token
+ * Test commit
  */
 
 var bcrypt = require('bcrypt-nodejs');
