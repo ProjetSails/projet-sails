@@ -7,8 +7,23 @@
 
 module.exports = {
 
+  schema: true,
   attributes: {
-
+    username: {},
+    password: {},
+    email: {},
+    firstName: {},
+    lastName: {},
+    toJson: function() {
+      var obj = this.toObject();
+      /* todo remove password */
+      return obj;
+    }
+  },
+  beforeUpdate: function(value, next) {
+    /*todo hash password*/
+  }, beforeCreate: function(value, next) {
+    /*todo hash password*/
   }
 };
 
