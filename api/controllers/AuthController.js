@@ -9,11 +9,12 @@ var passport = require('passport');
 
 function onPassportAuth(req, res, error, user, info)
 {
+
   if (error) {
     return res.serverError(error);
   }
   if (!user) {
-    return res.rejectUnauthorized(null, info);
+    return res.unauthorized(null, info && info.code, info && info.message);
   }
 
   return res.ok({
@@ -25,16 +26,16 @@ function onPassportAuth(req, res, error, user, info)
 
 module.exports = {
 
-  signIn : function(req, res) {
+  signin : function(req, res) {
     passport.authenticate('local', onPassportAuth.bind(this, req, res))(req, res);
   },
-  signUp : function(req, res) {
+  signup : function(req, res) {
     User
       .create(_.omit(req.allParams(), 'id'))
       .then(function(user) {
         return {
-          user: user,
-          token: SecurityService.createToken(user)
+          token: SecurityService.createToken(user),
+          user: user
         }
       })
       .then(res.created)

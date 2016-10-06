@@ -7,6 +7,9 @@ var bcrypt = require('bcrypt-nodejs');
 var jwt = require('jsonwebtoken');
 
 module.exports = {
+  secret: sails.config.jwtSettings.secret,
+  issuer: sails.config.jwtSettings.issuer,
+  audience: sails.config.jwtSettings.audience,
 
   hashPassword : function(user) {
     if (user.password) {
@@ -24,7 +27,9 @@ module.exports = {
       sails.config.jwtSettings.secret,
       {
         algorithm: sails.config.jwtSettings.algo,
-        expiresInMinutes: sails.config.jwtSettings.expires
+        expiresIn: sails.config.jwtSettings.expires,
+        issuer: sails.config.jwtSettings.issuer,
+        audience: sails.config.jwtSettings.audience
       }
     )
   }

@@ -3,12 +3,15 @@
  */
 
 var passport = require('passport');
-var localStrategy = require('passport-local');
-var jwtStrategy = require('passport-jwt');
+var LocalStrategy = require('passport-local').Strategy;
+var JwtStrategy = require('passport-jwt').Strategy;
+var ExtractJwt = require('passport-jwt').ExtractJwt;
 
-var EXPIRES = 60 * 24;
+var EXPIRES = 60 * 60 * 24;
 var SECRET = "qldjkfbqlskjfdbqksjhdbfjgzjgyevyutcivbe";
 var ALGO = "HS256";
+var ISSUER = 'test.com';
+var AUDIENCE = 'test.com';
 
 /**
  * Config strategy local
@@ -24,9 +27,10 @@ var LOCAL_STRATEGY_CONFIG = {
  */
 
 var JWT_STRATEGY_CONFIG = {
+  jwtFromRequest: ExtractJwt.fromAuthHeader(),
   secretOrKey : SECRET,
-  issuer : '',
-  audience : ''
+  issuer : ISSUER,
+  audience : AUDIENCE
 };
 
 /**
@@ -58,7 +62,7 @@ function onLocalStrategyAuth(email, password, next) {
         });
       }
       return next(null,user,{});
-    })
+    });
 }
 
 /**
@@ -73,12 +77,14 @@ function onJwtStrategyAuth(payload, next) {
   return next(null,user,{});
 }
 
-passport.use(new localStrategy(LOCAL_STRATEGY_CONFIG, onLocalStrategyAuth()));
+passport.use(new LocalStrategy(LOCAL_STRATEGY_CONFIG, onLocalStrategyAuth));
 
-passport.use(new jwtStrategy(JWT_STRATEGY_CONFIG, onJwtStrategyAuth()));
+passport.use(new JwtStrategy(JWT_STRATEGY_CONFIG, onJwtStrategyAuth));
 
 module.exports.jwtSettings = {
   expires: EXPIRES,
   secret: SECRET,
-  algo: ALGO
+  algo: ALGO,
+  issuer: ISSUER,
+  audience: AUDIENCE
 }
