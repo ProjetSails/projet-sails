@@ -73,9 +73,9 @@ function onJwtStrategyAuth(payload, next) {
   return next(null,user,{});
 }
 
-passport.use(new LocalStrategy(LOCAL_STRATEGY_CONFIG, onLocalStrategyAuth()));
+passport.use(new localStrategy(LOCAL_STRATEGY_CONFIG, onLocalStrategyAuth()));
 
-passport.use(new JwtStrategy(JWT_STRATEGY_CONFIG, onJwtStrategyAuth()));
+passport.use(new jwtStrategy(JWT_STRATEGY_CONFIG, onJwtStrategyAuth()));
 
 module.exports.jwtSettings = {
   expires: EXPIRES,

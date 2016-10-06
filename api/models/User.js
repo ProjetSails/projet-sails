@@ -16,14 +16,17 @@ module.exports = {
     lastName: {},
     toJson: function() {
       var obj = this.toObject();
-      /* todo remove password */
+      delete obj.password;
       return obj;
     }
   },
   beforeUpdate: function(value, next) {
-    /*todo hash password*/
-  }, beforeCreate: function(value, next) {
-    /*todo hash password*/
+    /* todo hash password if necessary */
+    return next();
+  },
+  beforeCreate: function(value, next) {
+    SecurityService.hashPassword(value);
+    return next();
   }
 };
 
