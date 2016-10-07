@@ -88,5 +88,12 @@ module.exports.connections = {
   * More adapters: https://github.com/balderdashy/sails                      *
   *                                                                          *
   ***************************************************************************/
-
+  MariaDB: {
+      adapter: 'sails-mysql',
+      host: 'dranaxele.ddns.net',
+      port: 3306,
+      user: 'sails',
+      password: 'ynovcam',
+      database: 'gestion_cam'
+  }
 };
