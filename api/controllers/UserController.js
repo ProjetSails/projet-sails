@@ -6,6 +6,8 @@
  */
 
 module.exports = {
-	
+    me: function (req, res) {
+        return res.send(req.user);
+    }
 };
 
