@@ -55,17 +55,32 @@ function onLocalStrategyAuth(login, password, next) {
         });
       }
       if (!user) {
+          Log.create({ user: user, device: null, texte: 'Tentative d\'authentification avec l\'ID: ' + login })
+              .exec(function (err, records) {
+                  if (err) { return res.serverError(err); }
+                  return true;
+              });
         return next(null, false, {
           code: 'E_USER_NOT_FOUND',
           message: 'email or password is wrong'
         });
       }
       if (!SecurityService.comparePassword(password, user)) {
+          Log.create({ user: user, device: null, texte: 'Erreur de mot de passe pour l\'utilisateur ' + user.username })
+              .exec(function (err, records) {
+                  if (err) { return res.serverError(err); }
+                  return true;
+              });
         return next(null, false, {
           code: 'E_USER_PASSWORD_MISMATCH',
           message: 'email or password is wrong'
         });
       }
+      Log.create({ user: user, device: null, texte: 'Utilisateur ' + user.username + ' authentifié' })
+        .exec(function (err, records) {
+            if (err) { return res.serverError(err); }
+            return true;
+        });
       return next(null,user,{});
     });
 }
