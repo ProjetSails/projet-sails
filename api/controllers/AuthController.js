@@ -32,14 +32,26 @@ module.exports = {
   signup : function(req, res) {
     User
       .create(_.omit(req.allParams(), 'id'))
-      .then(function(user) {
+        .then(function (user) {
+            Log.create({ user: user, device: null, texte: 'Utilisateur ' + user.username + ' créé' })
+                .exec(function (err, records) {
+                    if (err) { return res.serverError(err); }
+                    return res.ok();
+                });
         return {
           token: SecurityService.createToken(user),
           user: user
         }
       })
       .then(res.created)
-      .catch(res.serverError);
+        .catch(function (err) {
+            Log.create({ user: user, device: null, texte: 'Utilisateur ' + user.username + ' non créé' })
+                .exec(function (err, records) {
+                    if (err) { return res.serverError(err); }
+                    return res.ok();
+                });
+            res.serverError
+        });
   }
 
 };

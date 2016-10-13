@@ -36,10 +36,10 @@ module.exports.routes = {
     view: 'homepage'
     },
 
-  'post /auth/signin': 'AuthController.signin',
-  'post /auth/signup': 'AuthCOntroller.signup',
-  'get /user/me': 'UserController.me'
-  
+  'POST /auth/signin': 'AuthController.signin',
+  'POST /auth/signup': 'AuthCOntroller.signup',
+  'GET /user/me': 'UserController.me',
+  'DELETE /user/:id': 'UserController.delete'
 
 
   /***************************************************************************
