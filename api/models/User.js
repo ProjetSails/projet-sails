@@ -23,14 +23,6 @@ module.exports = {
       required: true,
       unique: true
     },
-    firstName: {
-      type: 'string',
-      defaultsTo: ''
-    },
-    lastName: {
-      type: 'string',
-      defaultsTo: ''
-    },
     toJson: function() {
       var obj = this.toObject();
       delete obj.password;
