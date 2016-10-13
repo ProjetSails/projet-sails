@@ -18,7 +18,7 @@ var AUDIENCE = 'test.com';
  */
 
 var LOCAL_STRATEGY_CONFIG = {
-  usernameField : 'login',
+  usernameField : 'email',
   passwordField : 'password'
 };
 
@@ -34,7 +34,7 @@ var JWT_STRATEGY_CONFIG = {
 };
 
 /**
- * function for handling login via login + password
+ * function for handling login via email + password
  * @param login
  * @param password
  * @param next
