@@ -7,7 +7,10 @@
 
 module.exports = {
 
-  attributes: {
+    attributes: {
+        name: {
+            type: 'text'
+        },
       user: {
           model: 'user'
       },

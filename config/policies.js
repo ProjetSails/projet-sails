@@ -53,5 +53,9 @@ module.exports.policies = {
 
   AuthController: {
     '*': true
+  },
+
+  DeviceController: {
+      '*': ['isAdmin', 'isAuthenticated']
   }
 };
