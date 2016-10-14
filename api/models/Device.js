@@ -20,6 +20,9 @@ module.exports = {
       code_carte: {
           type: 'string',
           required: true
+      },
+      group: {
+          model: 'group'
       }
 
   }
