@@ -11,8 +11,8 @@ module.exports = {
         return res.send(req.user);
     },
 
-    delete: function (req, res) {
-        User.findOne({ id: req.param('id') })
+    destroy: function (req, res) {
+        User.destroy({ id: req.param('id') })
             .exec(function (err, user) {
                 if (!user) {
                     return res.notFound('Could not find User, sorry.');
@@ -27,12 +27,19 @@ module.exports = {
                     .exec(function (err, records) {
                         if (err) { return res.serverError(err); }
                     });
-
-                User.destroy({ id: req.param('id') })
-                    .exec(function (err) {
-                        if (err) { return res.serverError(err); }
-                    });
                 return res.ok();
+            });
+    },
+
+    update: function (req, res) {
+        User.update({ id: req.param('id') }, req.allParams())
+            .exec(function (err, updated) {
+                if (err) { return res.serverError(err); }
+                Log.create({ user: req.user, device: null, texte: 'L\'Utilisateur ' + req.user.username + ' a modifie ses informations' })
+                    .exec(function (err, records) {
+                        if (err) { return res.serverError(err); }
+                        return res.json(req.user);
+                    });
             });
     }
 };

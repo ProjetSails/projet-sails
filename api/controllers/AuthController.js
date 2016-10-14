@@ -28,7 +28,8 @@ module.exports = {
 
   signin : function(req, res) {
     passport.authenticate('local', onPassportAuth.bind(this, req, res))(req, res);
-  },
+    },
+
   signup : function(req, res) {
     User
       .create(_.omit(req.allParams(), 'id'))
@@ -52,6 +53,16 @@ module.exports = {
                 });
             res.serverError
         });
+  },
+
+  signout: function (req, res) {
+      req.logout();
+      
+      Log.create({ user: req.user, device: null, texte: 'Utilisateur ' + req.user + ' deconnecte' })
+          .exec(function (err, records) {
+              if (err) { return res.serverError(err); }
+              return res.ok();
+          });
   }
 
 };

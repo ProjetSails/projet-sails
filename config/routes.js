@@ -39,7 +39,9 @@ module.exports.routes = {
   'POST /auth/signin': 'AuthController.signin',
   'POST /auth/signup': 'AuthCOntroller.signup',
   'GET /user/me': 'UserController.me',
-  'DELETE /user/:id': 'UserController.delete'
+  'DELETE /user/:id': 'UserController.destroy',
+  'PUT /user/:id': 'UserController.update',
+  'POST /auth/signout': 'AuthController.signout'
 
 
   /***************************************************************************
