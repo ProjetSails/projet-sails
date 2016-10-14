@@ -65,7 +65,7 @@ module.exports.cors = {
   ***************************************************************************/
 
   // methods: 'GET, POST, PUT, DELETE, OPTIONS, HEAD',
-  methods: 'GET, POST, DELETE',
+  methods: 'GET, POST, PUT, DELETE',
 
   /***************************************************************************
   *                                                                          *
