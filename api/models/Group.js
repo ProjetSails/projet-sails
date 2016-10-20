@@ -11,14 +11,7 @@ module.exports = {
     attributes: {
         name: {
             type: 'text'
-        },
-      user: {
-          model: 'user',
-          required: true
-      },
-      isAdmin: {
-          type: 'boolean'
-      }
+        }
   }
 };
 

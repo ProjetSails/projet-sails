@@ -5,21 +5,44 @@
  * @description :: TODO: You might write a short summary of how this policy works and what it represents here.
  * @help        :: http://sailsjs.org/#!/documentation/concepts/Policies
  */
-module.exports = function(req, res, next) {
+var passport = require('passport');
+module.exports = function (req, res, next) {
+    var passport = require('passport');
+    passport.authenticate('jwt', function (error, user, info) {
+        if (error) return res.serverError(error);
+        if (!user) {
+            return res.unauthorized(null, info && info.code, info && info.message);
+        }
+        req.user = user;
+        next();
+    })(req, res);
 
-    Group.findOne({
-        user: req.user,
-        id: req.param('group')
-    }).exec(function(err, group){
+    
+    
+    Device.findOne({
+        id: req.param('id')
+    }).exec(function (err, device) {
         if (err) {
             return res.serverError(err);
         }
-        if (!group) {
-            return res.notFound('Impossible de trouver le groupe.');
+        if (!device) {
+            return res.notFound('Impossible de trouver le device.');
         }
-        if (res.group.isAdmin) {
-            return next();
-        }
-        return res.forbidden('Vous n\'avez pas les permissions pour effectuer cette action.');
+        GroupUserRole.findOne({
+            group: device.group,
+            user: req.user['id']
+        }).exec(function (err, groupuserrole) {
+            if (err) {
+                return res.serverError(err);
+            }
+            if (!groupuserrole) {
+                return res.notFound('Impossible de trouver le rôle de l\'utilisateur.');
+            }
+            if (groupuserrole.isAdmin) {
+                sails.log.debug("Good");
+                return res.json('Le device a été supprimé avec succés');
+            }
+
+        });
     });
-};
+}

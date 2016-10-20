@@ -56,6 +56,9 @@ module.exports.policies = {
   },
 
   DeviceController: {
-      '*': ['isAdmin', 'isAuthenticated']
+      '*': ['isAuthenticated'],
+      destroy: ['isAdmin'],
+      post: ['isAdmin', 'isAuthenticated'],
+      put: ['isAdmin', 'isAuthenticated']
   }
 };
