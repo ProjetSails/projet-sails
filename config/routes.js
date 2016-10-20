@@ -41,7 +41,8 @@ module.exports.routes = {
   'GET /user/me': 'UserController.me',
   'DELETE /user/:id': 'UserController.destroy',
   'PUT /user/:id': 'UserController.update',
-  'POST /auth/signout': 'AuthController.signout'
+  'POST /auth/signout': 'AuthController.signout',
+  'GET /device/mine': 'DeviceController.mine'
 
 
   /***************************************************************************
