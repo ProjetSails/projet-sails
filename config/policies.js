@@ -55,6 +55,10 @@ module.exports.policies = {
     '*': true
   },
 
+  CameraController: {
+      '*': true
+  },
+
   DeviceController: {
       '*': ['isAuthenticated'],
       destroy: ['isAdmin'],

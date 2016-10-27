@@ -35,6 +35,9 @@ module.exports.routes = {
   '/': {
     view: 'homepage'
     },
+  '/camera': {
+      view: 'layout'
+  },
 
   'POST /auth/signin': 'AuthController.signin',
   'POST /auth/signup': 'AuthCOntroller.signup',
@@ -42,7 +45,8 @@ module.exports.routes = {
   'DELETE /user/:id': 'UserController.destroy',
   'PUT /user/:id': 'UserController.update',
   'POST /auth/signout': 'AuthController.signout',
-  'GET /device/mine': 'DeviceController.mine'
+  'GET /device/mine': 'DeviceController.mine',
+  'GET /camera/index': 'CameraController.index'
 
 
   /***************************************************************************
