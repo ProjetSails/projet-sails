@@ -19,10 +19,14 @@ module.exports = {
       },
       code_carte: {
           type: 'string',
-          required: true
+          required: true,
+          unique: true
       },
       group: {
           model: 'group'
+      },
+      angle: {
+          type: 'int'
       }
 
   }

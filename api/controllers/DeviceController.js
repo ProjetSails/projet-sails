@@ -23,6 +23,10 @@ module.exports = {
                         });
                 });
             });
+    },
+    afterUpdate: function(updatedRecord, cb) {
+        sails.log.debug('test');
+        Device.publishUpdate(updatedRecord.id, updatedRecord, req);
     }
 
 };
