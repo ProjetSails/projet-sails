@@ -136,8 +136,8 @@ module.exports.sockets = {
   * transport should be disabled.                                            *
   *                                                                          *
   ***************************************************************************/
-   transports: ["polling", "websocket"],
+  transports: ["polling", "websocket"],
 
-    serveClient: true
+  serveClient: true
 
 };
